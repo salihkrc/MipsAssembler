@@ -1,0 +1,70 @@
+**************MIPS ASSEMBLER in C *************
+Files:
+assembler.c : is the mother of the program it calls all required functions.
+
+file_parser.c: parses the MIPS assembly code to the hashtable by taking the digest of hash function
+
+tokenizer.h : parses the token in_str delimited by the characters in delim. it returns
+   an output string out_str, which contains the remaining elements of
+   the string after the first token. this can be used to parse all tokens in
+   a line by recursively calling the parse function.
+   
+   it also returns the actual delimiting character in delim_char, which can 
+   be used to define numerical ranges. if this is not desired, delim_char may be 
+   set to NULL.
+
+   it returns the first token delimited by characters in delim or NULL, 
+   if no such token is found.
+
+hash_function and hash_table: the use of them is store labels and PC of them to use it later (in Pass 2)
+
+Summury of Implementation:
+
+My program firstly scans for possible labels in MIPS assembly code and after that it executes the PASS 2 stage to convert MIPS assembly code to HEX machine code.
+Main idea is that, firstly the MIPS instructions are converted in BINARY the by combining them as 32-bit Register they are printed to output file as a HEX value.
+The output value is not a binary file but it is a .txt file to make it easy to read. 
+
+registers are in form of $1, $2, $3 etc. as required
+Sometimes if .data section is included in MIPS code segmantation fault can be invoked.
+
+
+PC value is shown in terminal.
+
+all I-type, R-type and J-type instructions are implemented and behave as we expect.
+*Implemented Instructions*
+
+- la
+- lw
+- sw
+- add
+- sub
+- addi
+- or
+- ori
+- slt
+- sll
+- srl
+- beq
+- bne
+- j
+
+
+test file is provided as test.asm
+
+HOW TO RUN:
+
+1. compile the source code:
+
+gcc assembler.c file_parser.c -o assembler
+
+2. Run it 
+
+./assembler test.asm test.txt
+
+The program built in machine:
+
+Linux Mint 18.1
+
+
+
+ 
